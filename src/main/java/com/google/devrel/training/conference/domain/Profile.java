@@ -5,16 +5,17 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.google.devrel.training.conference.form.ProfileForm.TeeShirtSize;
+import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 // TODO indicate that this class is an Entity
-@Entity
+
+@Cache@Entity
 public class Profile {
-	private String displayName;
-	private String mainEmail;
-	private TeeShirtSize teeShirtSize;
-	private List<String> conferenceKeysToAttend = new ArrayList<>(0);
+	String displayName;
+	String mainEmail;
+	TeeShirtSize teeShirtSize;
 
 	// TODO indicate that the userId is to be used in the Entity's key
 	@Id
@@ -62,10 +63,14 @@ public class Profile {
 	private Profile() {
 	}
 
-	public void update(String displayName2, TeeShirtSize teeShirtSize2) {
-		displayName = displayName2;
-		teeShirtSize = teeShirtSize2;
+	public void update(String displayName, TeeShirtSize teeShirtSize) {
+		// TODO Auto-generated method stub
+		this.displayName = displayName;
+		this.teeShirtSize = teeShirtSize;
 	}
+
+	// List of conferences the user has registered to attend
+	private List<String> conferenceKeysToAttend = new ArrayList<>(0);
 
 	public List<String> getConferenceKeysToAttend() {
 		return ImmutableList.copyOf(conferenceKeysToAttend);
